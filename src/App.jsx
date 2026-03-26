@@ -1,15 +1,27 @@
+import { Outlet, Route, Routes } from "react-router-dom"
 import  "./App.css"
 import { CustomerList } from "./components/customers/CustomerList"
 import { EmployeeList } from "./components/employees/EmployeeList"
 import { TicketList } from "./components/tickets/TicketList"
+import { NavBar } from "./components/nav/NavBar"
 
 export const App = () => {
   return (
-    <div>
-    {/*<TicketList /> */}
-    {/*<CustomerList /> */}
-    <EmployeeList/>
-    </div>
+    <Routes>
+      <Route 
+        path="/" 
+        element={
+          <> 
+            <NavBar/> 
+            <Outlet/> 
+          </>
+        }
+      >
+        <Route path="tickets" element={<TicketList/>} />
+        <Route path="employees" element={<EmployeeList/>} />
+        <Route path="customers" element={<CustomerList/>} />
+      </Route>
+    </Routes>
   )
 }   
 
