@@ -60,7 +60,7 @@ export const Ticket = ({ ticket, currentUser, getAndSetTickets }) => {
                     <div>{ticket.emergency ? "yes" : "no"}</div>
                 </div>
                 <div className="btn-container">
-                    {/* if logged in use is an employee and there is no employee ticket associated with the service ticket, then a button to claim the ticket should display*/}
+                    {/* if logged in use is an employee and there is no employee ticket associated with the service ticket, then a button to claim the ticket should display. Needed to pass currentUser from ApplicationViews to TicketList to Ticket so we can do our checks below*/}
                     {currentUser.isStaff && !assignedEmployee ? 
                     (<button className="btn btn-secondary" onClick={handleClaim}>
                         Claim

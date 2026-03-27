@@ -30,6 +30,9 @@ export const EmployeeDetails = () => {
                 <span className="employee-info">Rate : </span>
                 {employee.rate}
             </div>
+            <div>
+                Currently working on {employee.employeeTickets?.length} tickets
+            </div>
         </section>
     )
 }
