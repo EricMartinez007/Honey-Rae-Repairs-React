@@ -1,10 +1,32 @@
 import { useState } from "react"
 import "./Form.css"
+import { createTicket } from "../../services/ticketService"
+import { useNavigate } from "react-router-dom"
 
-export const TicketForm = () => {
+export const TicketForm = ({ currentUser }) => {
     //need to add emergency as false here to set a default value to our state obj 
     const [ticket, setTicket] = useState({ description: "", emergency: false })
 
+    const navigate = useNavigate()
+
+    const handleSave = (event) => {
+        event.preventDefault()
+
+        if (ticket.description) {
+            const newTicket = {
+                userId: currentUser.id,
+                description: ticket.description,
+                emergency: ticket.emergency,
+                dateCompleted: ""
+            }
+
+            createTicket(newTicket).then(() => {
+                navigate('/tickets')
+            })
+        } else {
+            window.alert("Please fill out the description!")
+        } 
+    }
 
     return (
         <form>
@@ -41,7 +63,12 @@ export const TicketForm = () => {
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <button className="form-btn btn-info">Submit Form</button>
+                    <button 
+                        className="form-btn btn-info"
+                        onClick={handleSave}
+                    >
+                        Submit Form
+                    </button>
                 </div>
             </fieldset>
         </form>
